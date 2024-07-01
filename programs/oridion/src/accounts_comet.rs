@@ -3,17 +3,34 @@ use super::*;
 
 ///------------------------------------------------------------//
 /// COMET PDA
+/// Created by users.
+/// Creator must submit a unique 4 digit code for each comet created.
+/// User creates a comet which will transcend through stars for a various amount of hops
+/// before ending at a destination address.
+/// - id
+/// - creator
+/// - created
+/// - pda
+/// - bump
+/// - deposit
+/// - destination
+/// - hops
+/// - hops_completed
+/// - last_updated
+///
+/// useful for later
+/// new anchor.BN(0).toArrayLike(Buffer)
+/// https://stackoverflow.com/questions/71807112/how-to-derive-pdas-with-multiple-seeds-in-anchor-rust
+///
 ///------------------------------------------------------------//
 #[derive(Accounts)]
 pub struct CreateComet<'info> {
     #[account(mut)]
+    pub creator: Signer<'info>,
+    #[account(mut)]
     pub universe: Account<'info,Universe>,
     #[account(mut)]
     pub planet: Account<'info,Planet>,
-    #[account(mut,address = TREASURY_PUBKEY)]
-    pub treasury: SystemAccount<'info>,
-    #[account(mut)]
-    pub creator: Signer<'info>,
     pub system_program: Program<'info,System>,
     pub rent: Sysvar<'info, Rent>,
 }
@@ -77,9 +94,9 @@ pub struct StarHopTwoStart<'info> {
 pub struct StarHopTwoEnd<'info> {
     #[account(mut)]
     pub to_planet: Account<'info,Planet>,
-    #[account(mut, has_one = manager, constraint = manager.key == &star_one.manager)]
+    #[account(mut, close = manager, has_one = manager, constraint = manager.key == &star_one.manager)]
     pub star_one: Account<'info, Star>,
-    #[account(mut, has_one = manager, constraint = manager.key == &star_two.manager)]
+    #[account(mut, close = manager, has_one = manager, constraint = manager.key == &star_two.manager)]
     pub star_two: Account<'info, Star>,
     #[account(mut, address = MANAGER_PUBKEY)]
     pub manager: Signer<'info>
@@ -130,11 +147,11 @@ pub struct StarHopThreeStart<'info> {
 pub struct StarHopThreeEnd<'info> {
     #[account(mut)]
     pub to_planet: Account<'info,Planet>,
-    #[account(mut, has_one = manager, constraint = manager.key == &star_one.manager)]
+    #[account(mut, close = manager, has_one = manager, constraint = manager.key == &star_one.manager)]
     pub star_one: Account<'info, Star>,
-    #[account(mut, has_one = manager, constraint = manager.key == &star_two.manager)]
+    #[account(mut, close = manager, has_one = manager, constraint = manager.key == &star_two.manager)]
     pub star_two: Account<'info, Star>,
-    #[account(mut, has_one = manager, constraint = manager.key == &star_three.manager)]
+    #[account(mut, close = manager, has_one = manager, constraint = manager.key == &star_three.manager)]
     pub star_three: Account<'info, Star>,
     #[account(mut, address = MANAGER_PUBKEY)]
     pub manager: Signer<'info>

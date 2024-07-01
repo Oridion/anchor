@@ -1,29 +1,31 @@
 [toolchain]
-anchor_version = "0.29.0" # `anchor-cli` version to use
-solana_version = "1.17.0" # Solana version to use
+anchor_version = "0.30.0" # `anchor-cli` version to use
+solana_version = "1.18.13" # Solana version to use
 
 [features]
 seeds = false
 skip-lint = false
+idl-build = ["anchor-lang/idl-build"]
 
 [programs.localnet]
-oridion = ""
+oridion = "33J2bC6ZYvg8Y77MWULZEWpWRkxCoM2aziZ5f67dwBXi"
 
 [programs.devnet]
-ord_prog_dev = "" #Oridion dev wallet
+oridion = "6ihF5TkmwWKPJfxDWJoA6f6EuLYqvPKdMbj9ohJ6n7kg" #Oridion dev wallet
 
 [programs.mainnet]
-ord_prog_main = "" #Oridion mainnet wallet
+oridion = "33J2bC6ZYvg8Y77MWULZEWpWRkxCoM2aziZ5f67dwBXi"
+
 
 [registry]
 url = "https://api.apr.dev"
 
 [provider]
-cluster = "Devnet"
+cluster = "https://mainnet.helius-rpc.com/?api-key=e9be3c89-9113-4c5d-be19-4dfc99d8c8f4"
+#cluster = "mainnet"
+#cluster = "devnet"
+#cluster = "localnet"
+
 wallet = ""
 
 [scripts]
-
-#this may not be needed. Isn't in the full on anchor project.
-[test.validator]
-bind_address = "127.0.0.1"

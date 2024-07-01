@@ -2,7 +2,7 @@ use anchor_lang::prelude::*;
 use super::*;
 
 ///-------------------------------------------------------------//
-/// BIG BANG UNIVERSE / GALAXY PDA
+/// BIG BANG UNIVERSE PDA
 ///-------------------------------------------------------------//
 #[derive(Accounts)]
 pub struct BigBang<'info> {
@@ -55,6 +55,3 @@ impl Universe {
         + LAMPORT_LENGTH // Hop star3 fee
         + LAMPORT_LENGTH; // Withdraw fee
 }
-//-------------------------------------------------------------//
-// END BIG BANG ACCOUNTS AND UNIVERSE
-//-------------------------------------------------------------//

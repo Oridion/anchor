@@ -1,9 +1,25 @@
 use anchor_lang::prelude::*;
 use super::*;
 
+
 ///-------------------------------------------------------------//
 /// PLANETS PDA
+/// SEED - name to bytes
+/// https://solana.stackexchange.com/questions/2840/best-ways-to-store-long-string-as-pda-seed
+/// https://github.com/0xShuk/String-as-PDA/blob/main/lib.rs
+///
 /// NINE PLANETS
+/// - ORNOPU
+/// - DORAZ
+/// - ANDORA
+/// - JEBU
+/// - BABALO
+/// - KOYOPA
+/// - VREDIA
+/// - BURU
+/// - ZENOS
+/// - ISOMA
+/// ["ORNOPU","DORAZ","ANDORA","JEBU","BABALO","KOYOPA","VREDIA","BURU","ZENOS","ISOMA"]
 ///-------------------------------------------------------------//
 #[derive(Accounts)]
 #[instruction(name: String)]
@@ -36,7 +52,7 @@ pub struct DeletePlanet<'info> {
     pub planet: Account<'info, Planet>,
     #[account(mut)]
     pub universe: Account<'info, Universe>,
-    #[account(mut)]
+    #[account(mut, address = MANAGER_PUBKEY)]
     pub creator: Signer<'info>,
 }
 
@@ -46,7 +62,7 @@ pub struct Planet {
     pub pda: Pubkey, //PDA
     pub created: i64, //Planet started
     pub bump: u8, // Bump
-    pub visits: u64, //Visitors
+    pub visits: u64, //Visitors 
 }
 impl Planet {
     const LEN: usize = DISCRIMINATOR_LENGTH

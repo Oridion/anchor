@@ -1,7 +1,5 @@
 use solana_program::{pubkey, pubkey::Pubkey};
 
-pub const TREASURY_PUBKEY: Pubkey = pubkey!("ordkZKeCDeo8u4Ep5WbiWoXhAU9pzxQZm7FHpKskiTx");
-
 pub const MANAGER_PUBKEY: Pubkey = pubkey!("ordnd8TZFYW4k4MeLrR3qSwXMxezL6W3WryUPYTzLQM");
 pub const UNIVERSE_PDA_SEED: &[u8] = b"_x_ORIDION_x_";
 
@@ -21,6 +19,7 @@ pub const PLANET_NAME: usize = 10 * 4; //10 characters long
 pub const TIMESTAMP_LENGTH: usize = 8;
 pub const STRING_LENGTH_PREFIX: usize = 4; // Stores the size of the string.
 pub const LAMPORT_LENGTH: usize = 8; //u64 = 8 bytes
+
 pub const U8_LENGTH: usize = 1; //BUMP = u8 1 = byte
 pub const U64_LENGTH: usize = 8; //8 = bytes
 
